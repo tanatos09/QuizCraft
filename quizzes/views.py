@@ -16,18 +16,18 @@ def create_quiz(request):  # vytvari kvizy
             return redirect('quiz_list')
     else:
         form = QuizForm()
-    return render(request, 'quizzes/create_quiz.html')
+    return render(request, 'create_quiz.html')
 
 
 def quiz_list(request):  # generuje seznam kvizu
     quizzes = Quiz.objects.all()
-    return render(request, 'quizzes/quiz_list.html', {'quizzes': quizzes})
+    return render(request, 'quiz_list.html', {'quizzes': quizzes})
 
 
 def quiz_detail(request, quiz_id):  # zobrazuje detail kvizu
     quiz = get_object_or_404(Quiz, id=quiz_id)
     questions = quiz.questions.all()
-    return render(request, 'quizzes/quiz_detail.html', {'quiz': quiz, 'questions': questions})
+    return render(request, 'quiz_detail.html', {'quiz': quiz, 'questions': questions})
 
 
 def add_question(request, quiz_id):  # pridava otazky ke kvizu
@@ -41,7 +41,7 @@ def add_question(request, quiz_id):  # pridava otazky ke kvizu
             return redirect('quiz_detail', quiz_id=quiz.id)
     else:
         form = QuestionForm(initial={'quiz_id': quiz.id})
-    return render(request, 'quizzes/add_question.html', {'form': form, 'quiz': quiz})
+    return render(request, 'add_question.html', {'form': form, 'quiz': quiz})
 
 def add_answer(request, question_id): #pridani odpovedi k otazce
     question = get_object_or_404(Question, id=question_id)
@@ -54,6 +54,6 @@ def add_answer(request, question_id): #pridani odpovedi k otazce
             return redirect('quiz_detail', quiz_id=question.id)
     else:
         form = AnswerForm(initial={'question': question})
-    return render(request, 'quezzes/add_answer', {'form': form, 'question': question})
+    return render(request, 'add_answer.html', {'form': form, 'question': question})
 
 

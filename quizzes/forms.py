@@ -1,6 +1,6 @@
 
 from django.forms import ModelForm
-from models import Quiz, Question, Answer
+from .models import Quiz, Question, Answer
 
 class QuizForm(ModelForm):
     class Meta:
